@@ -18,41 +18,35 @@ import pageObject.MainPage;
 
 
 public class Selenium {
+    private static WebDriver webDriverFf;
+
     @BeforeClass
     public void beforeClass() {
     }
 
     public static void main(String[] args) throws InterruptedException {
         System.setProperty("webdriver.gecko.driver", "c:\\Users\\denisan\\IdeaProjects\\Webdriver_ArtifactId\\geckodriver.exe");
-        WebDriver webDriverFf = new FirefoxDriver();
-
-        MainPage mainPage = new MainPage(webDriverFf);
+        webDriverFf = new FirefoxDriver();
+        MainPage mainPage = new MainPage();
         mainPage.getLoginPageEnterButton().click();
         Thread.sleep(2000);
-//        LoginPage loginPage = new LoginPage(webDriverFf);
-        WebElement loginPageLoginField = webDriverFf.findElement(By.xpath("/html/body/div[6]/div/div[1]/div/div[2]/div/div[2]/div/div[2]/div/div[2]/form/div[1]/div[1]/input"));
-        loginPageLoginField.sendKeys("denisanischenko@gmail.com");
+        mainPage.loginMethod("denisanischenko@gmail.com", "gbhfvblf1984");
+        webDriverFf.get("https://catalog.onliner.by/mobile/apple/iphonex/prices?town=minsk");
+        webDriverFf.findElement(By.cssSelector(".offers-list__button_basket")).click();
+        webDriverFf.findElement(By.cssSelector("b-top-navigation-cart__link")).click();
+    }
 
-
-//        mainPage.getLoginPageLoginField().sendKeys("gbhfvblf1984");
+    public static WebDriver getWebDriverFf() {
+        return webDriverFf;
     }
 
 }
 
-//}
 
-//    public static void login() {
-//        MainPage loginPage = new MainPage();
-
-
-//LOGINPAGE
-//        WebElement loginPageLoginField = webDriverFf.findElement(By.xpath("/html/body/div[6]/div/div[1]/div/div[2]/div/div[2]/div/div[2]/div/div[2]/form/div[1]/div[1]/input"));
-//        loginPageLoginField.sendKeys("denisanischenko@gmail.com");
-//        WebElement loginPagePasswordField = webDriverFf.findElement(By.xpath("/html/body/div[6]/div/div[1]/div/div[2]/div/div[2]/div/div[2]/div/div[2]/form/div[1]/div[2]/input"));
-//        loginPagePasswordField.sendKeys("gbhfvblf1984");
-//        WebElement loginPageSubmitButton = webDriverFf.findElement(By.xpath("/html/body/div[6]/div/div[1]/div/div[2]/div/div[2]/div/div[2]/div/div[2]/form/div[3]/div/button"));
-//        loginPageSubmitButton.click();
-//        Thread.sleep(2000);
+//Todo
+// УБРАТЬ ВСЕ СЛИПЫ!!!
+// Сделать аннотацию в TESTNG
+// Относительный путь geckodriver.exe
 
 
 //        element.submit(); Now submit the form. WebDriver will find the form for us from the element
